@@ -10,7 +10,7 @@ import net.corda.core.utilities.UntrustworthyData;
 // ******************
 // * Responder flow *
 // ******************
-@InitiatedBy(Initiator.class)
+@InitiatedBy(EchoInitiator.class)
 public class EchoResponder extends FlowLogic<Void> {
     private FlowSession counterpartySession;
 
