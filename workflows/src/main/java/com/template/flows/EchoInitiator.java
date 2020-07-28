@@ -5,6 +5,7 @@ import net.corda.core.flows.*;
 import net.corda.core.identity.CordaX500Name;
 import net.corda.core.identity.Party;
 import net.corda.core.utilities.ProgressTracker;
+import net.corda.core.utilities.UntrustworthyData;
 import sun.security.x509.X500Name;
 
 import java.util.Set;
@@ -41,8 +42,11 @@ public class EchoInitiator extends FlowLogic<Void> {
         for (Party p : parties) {
          FlowSession session = initiateFlow(p);
          session.send(message);
-        }
 
+         UntrustworthyData<String> receivedData = session.receive(String.class);
+         String receivedStr = receivedData.unwrap(data -> {return data;});
+         System.out.println(receivedStr);
+        }
 
         return null;
     }
