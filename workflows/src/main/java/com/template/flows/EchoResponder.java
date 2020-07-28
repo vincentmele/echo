@@ -25,6 +25,7 @@ public class EchoResponder extends FlowLogic<Void> {
         UntrustworthyData<String> receivedData = counterpartySession.receive(String.class);
         String receivedStr = receivedData.unwrap(data -> {return data;});
         System.out.println(receivedStr);
+
         StringBuilder sb = new StringBuilder();
         sb.append(receivedStr);
         sb.reverse();

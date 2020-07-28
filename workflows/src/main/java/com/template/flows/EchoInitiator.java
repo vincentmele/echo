@@ -39,6 +39,10 @@ public class EchoInitiator extends FlowLogic<Void> {
 
        Set<Party> parties = getServiceHub().getIdentityService().partiesFromName(this.counterParty,true);
 
+       if (parties.isEmpty()) {
+           throw new FlowException("No valid party provided.");
+        }
+
         for (Party p : parties) {
          FlowSession session = initiateFlow(p);
          session.send(message);
